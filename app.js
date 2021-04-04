@@ -71,3 +71,42 @@ const menu = [{
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+/** Get Categories */
+const categories = menu.reduce((categs, el) => {
+
+  /** Add category if it's not added before */
+  if (!categs.includes(el.category)) {
+    categs.push(el.category);
+  }
+  return categs;
+
+}, ["All"]);
+
+/** Add Buttons */
+const buttons = categories.map(el => {
+
+  /** Create new button */
+  let button = document.createElement("button");
+
+  button.classList.value = "btn btn-outline-dark btn-item";
+  button.setAttribute("data-category", el);
+  button.innerText = el;
+  button.onclick = updateList;
+
+  /** Add button to container */
+  document.querySelector(".btn-container").append(button);
+});
+
+function updateList() {
+
+  const category = this.dataset.category;
+
+  const items = category === "All" ? menu : menu.filter(el => {
+    return el.category == this.dataset.category;
+  });
+
+  items.map(el => {
+    // Item implementation
+  });
+}
