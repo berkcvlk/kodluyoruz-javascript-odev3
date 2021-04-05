@@ -100,13 +100,40 @@ const buttons = categories.map(el => {
 
 function updateList() {
 
-  const category = this.dataset.category;
+  let category = this.dataset.category;
+  const items = category === "All" ? menu : menu.filter(el => el.category == category);
 
-  const items = category === "All" ? menu : menu.filter(el => {
-    return el.category == this.dataset.category;
-  });
+  /** Container for all items */
+  let container = document.querySelector(".menu-list") ||
+    document.createElement("div");
+  
+  /** Configure the menu */
+  container.innerHTML = "";
+  container.classList.add("menu-list");
 
   items.map(el => {
-    // Item implementation
+
+    /** Create innerHTML for item */
+    let item = `
+      <div class="menu-item">
+        <img class="photo" src="${el.img}" alt="${el.title}">
+        <div class="menu-info">
+          <div class="menu-title">
+            <h3>${el.title}</h3>
+            <h3 class="price">${el.price}</h3>
+          </div>
+          <p class="menu-text">${el.desc}</p>
+        </div>
+      </div>
+    `;
+
+    /** Add item to the menu */
+    container.innerHTML += item;
   });
+
+  /** Add container to the section */
+  document.querySelector(".section-center").append(container);
 }
+
+/** Click first button on first load */
+document.querySelector("[data-category]").click();

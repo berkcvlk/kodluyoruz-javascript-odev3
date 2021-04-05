@@ -36,7 +36,7 @@ h2 {
   border: 0.25rem solid black;
   border-radius: 10px;
 }
-.menu-items {
+.menu-item {
   display: flex;
   margin: 20px 0;
 }
